@@ -29,6 +29,7 @@ document.getElementById("phone-minus").addEventListener("click", function () {
   updateProductNumber("phone-number", false, "phone-total", 1219);
 });
 
+// this is for subtotal tax and total
 function getInputValue(product) {
   const productInput = document.getElementById(product + "-number");
   const productNumber = parseInt(productInput.value);
