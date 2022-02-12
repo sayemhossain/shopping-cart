@@ -1,27 +1,43 @@
-function updateCaseNumber(quantity, isIncreasing, priceId, price) {
-  const input = document.getElementById(quantity);
-  var totalNumber = input.value;
+function updateProductNumber(quantity, isIncreasing, priceId, price) {
+  const productInput = document.getElementById(quantity);
+  var productNumber = productInput.value;
   if (isIncreasing == true) {
-    totalNumber = parseInt(totalNumber) + 1;
-  } else if (totalNumber > 0) {
-    totalNumber = parseInt(totalNumber) - 1;
+    productNumber = parseInt(productNumber) + 1;
+  } else if (productNumber > 0) {
+    productNumber = parseInt(productNumber) - 1;
   }
-  input.value = totalNumber;
+  productInput.value = productNumber;
   //   this is for showing price
   const addPrice = document.getElementById(priceId);
-  addPrice.innerText = totalNumber * price;
+  addPrice.innerText = productNumber * price;
+  calculateTotal();
 }
+
+//   this is for showing quantity and price
 document.getElementById("case-plus").addEventListener("click", function () {
-  updateCaseNumber("case-number", true, "case-total", 59);
+  updateProductNumber("case-number", true, "case-total", 59);
 });
 document.getElementById("case-minus").addEventListener("click", function () {
-  updateCaseNumber("case-number", false, "case-total", 59);
+  updateProductNumber("case-number", false, "case-total", 59);
 });
 
-// this is for phone quantity
+// this is for phone quantity and price
 document.getElementById("phone-plus").addEventListener("click", function () {
-  updateCaseNumber("phone-number", true, "phone-total", 1219);
+  updateProductNumber("phone-number", true, "phone-total", 1219);
 });
 document.getElementById("phone-minus").addEventListener("click", function () {
-  updateCaseNumber("phone-number", false, "phone-total", 1219);
+  updateProductNumber("phone-number", false, "phone-total", 1219);
 });
+
+function getInputValue(product) {
+  const productInput = document.getElementById(product + "-number");
+  const productNumber = parseInt(productInput.value);
+  return productNumber;
+}
+function calculateTotal() {
+  const phoneTotal = getInputValue("phone") * 1219;
+  const caseTotal = getInputValue("case") * 59;
+  const subTotal = phoneTotal + caseTotal;
+  //   update on the html
+  document.getElementById("sub-total").innerText = subTotal;
+}
